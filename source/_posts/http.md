@@ -31,9 +31,10 @@ content-type: application/x-www-form-urlencoded; charset=UTF-8
 
 // Form Data
 x=1&y=2
+```
 Request Payload
 当发起一次POST请求时，若content-type为application/json，则参数会以Request Payload的形式进行传递（显然的，数据格式为JSON），不会显式出现在请求url中。
-```
+
 如下http请求报头：
 ``` javascript
 
