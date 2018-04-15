@@ -3,10 +3,12 @@ title: Git常用指令
 date: 2018-03-28 14:01:21
 tags: [Git]
 ---
-#Git 常用命令速查
->新增ssh key链接
-*ssh-keygen -t rsa -C "youremail@example.com"
-*ssh git@github.com
+# Git 常用命令速查
+> 新增ssh key链接
+```
+ssh-keygen -t rsa -C "youremail@example.com" //生成一个sshkey
+ssh git@github.com //测试是否连通
+```
 
 *git branch 查看本地所有分支
 *git status 查看当前状态 
