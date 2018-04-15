@@ -4,7 +4,10 @@ date: 2018-03-28 14:01:21
 tags: [Git]
 ---
 #Git 常用命令速查
-![avatar](https://files.jb51.net/file_images/article/201409/git_big_jb51.jpg)
+>新增ssh key链接
+*ssh-keygen -t rsa -C "youremail@example.com"
+*ssh git@github.com
+
 *git branch 查看本地所有分支
 *git status 查看当前状态 
 *git commit 提交 
