@@ -6,20 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>小谈JSON WEB TOKEN | BoBo&#39;s Blog</title>
+  <title>BoBo&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Json web token (JWT), 是为了在网络应用环境间传递声明而执行的一种基于JSON的开放标准（(RFC 7519).该token被设计为紧凑且安全的，特别适用于分布式站点的单点登录（SSO）场景。JWT的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源，也可以增加一些额外的其它业务逻辑所必须的声明信息，该token也可直接被用于认证，也可">
-<meta name="keywords" content="jwt,token,前后端分离,权限,身份认证">
+  <meta name="description" content="title: 一点小感date: 2018-04-19 17:32:09tags: [随笔]categories: 随笔 – 程序员除去繁华，论匠心安在1234coder==代码programmer==代码+思想software engineer==代码+思想+工匠精神developer==上述所有+软技能 最近有感，也同为自省——“匠心”。想到了前阵子的《我在故宫修文物》，整个纪录片归为六字">
 <meta property="og:type" content="article">
-<meta property="og:title" content="小谈JSON WEB TOKEN">
-<meta property="og:url" content="http://yoursite.com/2018/03/24/jwt/index.html">
+<meta property="og:title" content="BoBo&#39;s Blog">
+<meta property="og:url" content="http://yoursite.com/2018/04/19/0419daily/index.html">
 <meta property="og:site_name" content="BoBo&#39;s Blog">
-<meta property="og:description" content="Json web token (JWT), 是为了在网络应用环境间传递声明而执行的一种基于JSON的开放标准（(RFC 7519).该token被设计为紧凑且安全的，特别适用于分布式站点的单点登录（SSO）场景。JWT的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源，也可以增加一些额外的其它业务逻辑所必须的声明信息，该token也可直接被用于认证，也可">
+<meta property="og:description" content="title: 一点小感date: 2018-04-19 17:32:09tags: [随笔]categories: 随笔 – 程序员除去繁华，论匠心安在1234coder==代码programmer==代码+思想software engineer==代码+思想+工匠精神developer==上述所有+软技能 最近有感，也同为自省——“匠心”。想到了前阵子的《我在故宫修文物》，整个纪录片归为六字">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-14T14:46:06.000Z">
+<meta property="og:updated_time" content="2018-04-19T09:36:35.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="小谈JSON WEB TOKEN">
-<meta name="twitter:description" content="Json web token (JWT), 是为了在网络应用环境间传递声明而执行的一种基于JSON的开放标准（(RFC 7519).该token被设计为紧凑且安全的，特别适用于分布式站点的单点登录（SSO）场景。JWT的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源，也可以增加一些额外的其它业务逻辑所必须的声明信息，该token也可直接被用于认证，也可">
+<meta name="twitter:title" content="BoBo&#39;s Blog">
+<meta name="twitter:description" content="title: 一点小感date: 2018-04-19 17:32:09tags: [随笔]categories: 随笔 – 程序员除去繁华，论匠心安在1234coder==代码programmer==代码+思想software engineer==代码+思想+工匠精神developer==上述所有+软技能 最近有感，也同为自省——“匠心”。想到了前阵子的《我在故宫修文物》，整个纪录片归为六字">
   
     <link rel="alternative" href="/atom.xml" title="BoBo&#39;s Blog" type="application/atom+xml">
   
@@ -161,55 +160,25 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-jwt" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-0419daily" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      小谈JSON WEB TOKEN
-    </h1>
-  
-
-        
-        <a href="/2018/03/24/jwt/" class="archive-article-date">
-  	<time datetime="2018-03-24T02:48:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-24</time>
-</a>
-        
-      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Json web token (JWT), 是为了在网络应用环境间传递声明而执行的一种基于JSON的开放标准（(RFC 7519).该token被设计为紧凑且安全的，特别适用于分布式站点的单点登录（SSO）场景。JWT的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源，也可以增加一些额外的其它业务逻辑所必须的声明信息，该token也可直接被用于认证，也可被加密。</p>
-<p>起源<br>说起JWT，我们应该来谈一谈基于token的认证和传统的session认证的区别。</p>
-<p>传统的session认证<br>我们知道，http协议本身是一种无状态的协议，而这就意味着如果用户向我们的应用提供了用户名和密码来进行用户认证，那么下一次请求时，用户还要再一次进行用户认证才行，因为根据http协议，我们并不能知道是哪个用户发出的请求，所以为了让我们的应用能识别是哪个用户发出的请求，我们只能在服务器存储一份用户登录的信息，这份登录信息会在响应时传递给浏览器，告诉其保存为cookie,以便下次请求时发送给我们的应用，这样我们的应用就能识别请求来自哪个用户了,这就是传统的基于session认证。</p>
-<p>但是这种基于session的认证使应用本身很难得到扩展，随着不同客户端用户的增加，独立的服务器已无法承载更多的用户，而这时候基于session认证应用的问题就会暴露出来.<br><a id="more"></a></p>
-<p>基于session认证所显露的问题<br>Session: 每个用户经过我们的应用认证之后，我们的应用都要在服务端做一次记录，以方便用户下次请求的鉴别，通常而言session都是保存在内存中，而随着认证用户的增多，服务端的开销会明显增大。</p>
-<p>扩展性: 用户认证之后，服务端做认证记录，如果认证的记录被保存在内存中的话，这意味着用户下次请求还必须要请求在这台服务器上,这样才能拿到授权的资源，这样在分布式的应用上，相应的限制了负载均衡器的能力。这也意味着限制了应用的扩展能力。</p>
-<p>CSRF: 因为是基于cookie来进行用户识别的, cookie如果被截获，用户就会很容易受到跨站请求伪造的攻击。</p>
-<p>基于token的鉴权机制<br>基于token的鉴权机制类似于http协议也是无状态的，它不需要在服务端去保留用户的认证信息或者会话信息。这就意味着基于token认证机制的应用不需要去考虑用户在哪一台服务器登录了，这就为应用的扩展提供了便利。</p>
-<p>流程上是这样的：</p>
-<p>用户使用用户名密码来请求服务器<br>服务器进行验证用户的信息<br>服务器通过验证发送给用户一个token<br>客户端存储token，并在每次请求时附送上这个token值<br>服务端验证token值，并返回数据<br>这个token必须要在每次请求时传递给服务端，它应该保存在请求头里， 另外，服务端要支持CORS(跨来源资源共享)策略，一般我们在服务端这么做就可以了<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: *</span><br></pre></td></tr></table></figure></p>
-<p>那么我们现在回到JWT的主题上。</p>
-<p>JWT长什么样？<br>JWT是由三段信息构成的，将这三段信息文本用.链接一起就构成了Jwt字符串。就像这样:</p>
-<p>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ<br>JWT的构成<br>第一部分我们称它为头部（header),第二部分我们称其为载荷（payload, 类似于飞机上承载的物品)，第三部分是签证（signature).</p>
-<p>header<br>jwt的头部承载两部分信息：</p>
-<p>声明类型，这里是jwt<br>声明加密的算法 通常直接使用 HMAC SHA256<br>完整的头部就像下面这样的JSON：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  'typ': 'JWT',</span><br><span class="line">  'alg': 'HS256'</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>然后将头部进行base64加密（该加密是可以对称解密的),构成了第一部分.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9</span><br></pre></td></tr></table></figure></p>
-<p>playload<br>载荷就是存放有效信息的地方。这个名字像是特指飞机上承载的货品，这些有效信息包含三个部分</p>
-<p>标准中注册的声明<br>公共的声明<br>私有的声明<br>标准中注册的声明 (建议但不强制使用) ：</p>
-<p>iss: jwt签发者<br>sub: jwt所面向的用户<br>aud: 接收jwt的一方<br>exp: jwt的过期时间，这个过期时间必须要大于签发时间<br>nbf: 定义在什么时间之前，该jwt都是不可用的.<br>iat: jwt的签发时间<br>jti: jwt的唯一身份标识，主要用来作为一次性token,从而回避重放攻击。<br>公共的声明 ：<br>公共的声明可以添加任何的信息，一般添加用户的相关信息或其他业务需要的必要信息.但不建议添加敏感信息，因为该部分在客户端可解密.</p>
-<p>私有的声明 ：<br>私有声明是提供者和消费者所共同定义的声明，一般不建议存放敏感信息，因为base64是对称解密的，意味着该部分信息可以归类为明文信息。</p>
-<p>定义一个payload:<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"sub"</span>: <span class="string">"1234567890"</span>,</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"John Doe"</span>,</span><br><span class="line">  <span class="attr">"admin"</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>然后将其进行base64加密，得到Jwt的第二部分。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9</span><br></pre></td></tr></table></figure></p>
-<p>signature<br>jwt的第三部分是一个签证信息，这个签证信息由三部分组成：</p>
-<p>header (base64后的)<br>payload (base64后的)<br>secret<br>这个部分需要base64加密后的header和base64加密后的payload使用.连接组成的字符串，然后通过header中声明的加密方式进行加盐secret组合加密，然后就构成了jwt的第三部分。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> encodedString = base64UrlEncode(header) + <span class="string">'.'</span> + base64UrlEncode(payload);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> signature = HMACSHA256(encodedString, <span class="string">'secret'</span>); <span class="comment">// TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ</span></span><br><span class="line">将这三部分用.连接成一个完整的字符串,构成了最终的jwt:</span><br><span class="line"></span><br><span class="line">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ</span><br></pre></td></tr></table></figure>
-<p>注意：secret是保存在服务器端的，jwt的签发生成也是在服务器端的，secret就是用来进行jwt的签发和jwt的验证，所以，它就是你服务端的私钥，在任何场景都不应该流露出去。一旦客户端得知这个secret, 那就意味着客户端是可以自我签发jwt了。</p>
-<p>如何应用<br>一般是在请求头里加入Authorization，并加上Bearer标注：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fetch(<span class="string">'api/user/1'</span>, &#123;</span><br><span class="line">  headers: &#123;</span><br><span class="line">    <span class="string">'Authorization'</span>: <span class="string">'Bearer '</span> + token</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-<p>服务端会验证token，如果验证通过就会返回相应的资源。整个流程就是这样的:</p>
-<p>总结<br>优点<br>因为json的通用性，所以JWT是可以进行跨语言支持的，像JAVA,JavaScript,NodeJS,PHP等很多语言都可以使用。<br>因为有了payload部分，所以JWT可以在自身存储一些其他业务逻辑所必要的非敏感信息。<br>便于传输，jwt的构成非常简单，字节占用很小，所以它是非常便于传输的。<br>它不需要在服务端保存会话信息, 所以它易于应用的扩展<br>安全相关<br>不应该在jwt的payload部分存放敏感信息，因为该部分是客户端可解密的部分。<br>保护好secret私钥，该私钥非常重要。<br>如果可以，请使用https协议</p>
+        <hr>
+<p>title: 一点小感<br>date: 2018-04-19 17:32:09<br>tags: [随笔]<br>categories: 随笔</p>
+<p>–</p>
+<h1 id="程序员除去繁华，论匠心安在"><a href="#程序员除去繁华，论匠心安在" class="headerlink" title="程序员除去繁华，论匠心安在"></a>程序员除去繁华，论匠心安在</h1><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">coder</span>==代码</span><br><span class="line"><span class="attribute">programmer</span>==代码+思想</span><br><span class="line">software <span class="attribute">engineer</span>==代码+思想+工匠精神</span><br><span class="line"><span class="attribute">developer</span>==上述所有+软技能</span><br></pre></td></tr></table></figure>
+<p>最近有感，也同为自省——“匠心”。想到了前阵子的《我在故宫修文物》，整个纪录片归为六字，“择一事，终一身”。开发亦然。</p>
+<h2 id="匠心"><a href="#匠心" class="headerlink" title="匠心"></a>匠心</h2><p>中国古时的玉匠，日本传统的刀匠，欧洲中世纪的石匠——任何伟大的作品背后都有一颗匠心。</p>
+<h2 id="何为匠心"><a href="#何为匠心" class="headerlink" title="何为匠心"></a>何为匠心</h2><p>匠心是对于作品而言的。<br>匠心是倾注于作品之中的精神、情感、乃至魂魄。<br>匠心发自于爱，是对作品视如己出的拳拳之心，是恒久忍耐又有恩慈。<br>匠心是出于这份爱的对于完美的追求，是追求中不避艰苦，是追求中自得其乐。<br>匠心是涵泳在作品之中的自我实现，是我与作品的相互完成，彼此造就。</p>
+<h2 id="匠人们"><a href="#匠人们" class="headerlink" title="匠人们"></a>匠人们</h2><p>当年Ken Thompson 和 Dennis M.Ritchie 一起在贝尔实验室里苦心孤诣。<br>如今，没有人不知道Unix意味着什么，C意味着什么。<br>他们的匠心也彰显在Unix和C中令无数人为之惊叹、感怀。<br><a id="more"></a></p>
+<h2 id="如今的coder"><a href="#如今的coder" class="headerlink" title="如今的coder"></a>如今的coder</h2><p>如今，我们再也难得见到“作品”问世。<br>甚至于“产品”也是少见。见得最多的则是“商品”。<br>对于我们而言，做什么东西并不重要，重要的是做这个挣不挣钱。于是我们冲着挣钱做了各种项目，C/S、B/S、前端、后端、数据库、Java、.Net、安卓——仿佛无所不知，无所不晓，十年之后回首，觉得自己已然是全才。<br>我们从事了大量的劳动，写了几十万行代码。我们的工资越来越高，并为此沾沾自喜。<br>这样的成就，无非是一个熟练工人的成就，谈不上“匠人”。</p>
+<h2 id="匠心何在"><a href="#匠心何在" class="headerlink" title="匠心何在"></a>匠心何在</h2><p>世界如此繁华，匠心未免太奢侈了！我们在喧哗与骚动中度日，有太多的追求，太多的比较，太多的你追我赶，太多的惶惶终日。每天有看不完的新闻，刷不完的微博，做不完的手头工作。我们为无尽的事情发愁，疲于奔命。匠心未免太奢侈了！早在我们出生的那一刻，我们就开始照着大家来活，大家都在读书，大家都在考学，大家都在找工作，大家都在结婚，大家都在买房，大家都在炒股，当我们跟着大家忙忙碌碌的时候，匠心自始就已沉沦！</p>
+<h2 id="异同"><a href="#异同" class="headerlink" title="异同"></a>异同</h2><p>假使我们没有匠心，我们将不会在工作中获得真正的快乐。因为我们不能自觉自由地工作，我们的工作是boss定义的，而不是自己定义的。如此一来，我们就与我们的劳动之间切断了血肉联系。我们的劳动成为了压迫我们、奴役我们的异己力量。我们沦为被迫劳动。我们真正的生活在下班之后开始。<br>唯有在拥有匠心之后，我们才能走向真正的自我实现。马斯洛将人的最高层次的需求定义为自我实现。一个自我实现的人，一个将自己的才能发挥到最大限度的人，才是那个获得最大心理满足的人。现实生活中唯有少数精英才能够成为自我实现人。但是这并不妨碍我们追求自我实现。一个有着庸碌之心的人，是不可能走向自我实现的。唯有重拾匠心，我们才能占有工作的全部意义，才能不避艰苦、精益求精，与自己的作品相互完成，彼此造就。</p>
+<h2 id="结："><a href="#结：" class="headerlink" title="结："></a>结：</h2><p>上文部分节选。近阶段也一直在反省这个问题，包括但不限于：如何才能够更优雅，更高质量，更有效率的开发，更能当之为作品而去开发。当下的环境能坚持“匠心”的态度更为重要，不可能每个人都是达到John Resig(Jquery的作者)等人的高度。共勉。</p>
+<blockquote>
+<h3 id="能见众生便是如来，不易匠心方得始终。"><a href="#能见众生便是如来，不易匠心方得始终。" class="headerlink" title="能见众生便是如来，不易匠心方得始终。"></a>能见众生便是如来，不易匠心方得始终。</h3></blockquote>
 
       
 
@@ -218,45 +187,7 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jwt</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">token</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">前后端分离</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">权限</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">身份认证</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/web//" class="article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
 
       
 
@@ -306,7 +237,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/03/24/jwt/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/04/19/0419daily/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -320,15 +251,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/03/24/life/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          life
-        
-      </div>
-    </a>
   
+    <a href="/2018/04/09/vue-jquery/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">对比Vue及Jquery</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
