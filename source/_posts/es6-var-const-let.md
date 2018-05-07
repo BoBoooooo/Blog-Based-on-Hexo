@@ -1,7 +1,7 @@
 ---
 title: var,const,let
 date: 2018-05-04 17:23:55
-tags: [var,let,const]
+tags: [var,let,const,es6]
 categories: 前端
 ---
 > ES6提供了let和const两种新的变量声明方式，使得在JS中变量的声明更像java那样。
