@@ -1,4 +1,4 @@
----
+﻿---
 title: 一点小感
 date: 2018-04-19 17:32:09
 tags: [随笔]
@@ -8,9 +8,9 @@ categories: 随笔
 
 ```
 coder==代码
-programmer==代码+思想
-software engineer==代码+思想+工匠精神
-developer==上述所有+软技能
+programmer==代码+思想。
+software engineer==代码+思想+工匠精神。
+developer==上述所有+软技能。
 ```
 最近有感，也同为自省——“匠心”。想到了前阵子的《我在故宫修文物》，整个纪录片归为六字，“择一事，终一身”。开发亦然。
 ## 匠心
