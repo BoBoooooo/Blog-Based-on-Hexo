@@ -7,14 +7,14 @@ categories: 前端
 
 >偶然间发现一篇好文，转载自https://segmentfault.com/q/1010000012116003,作者:边城.
 
-#async 和 await 在干什么
+# async 和 await 在干什么
 任意一个名称都是有意义的，先从字面意思来理解。async 是“异步”的简写，而 await 可以认为是 async wait 的简写。所以应该很好理解 async 用于申明一个 function 是异步的，而 await 用于等待一个异步方法执行完成。
 
 另外还有一个很有意思的语法规定，await 只能出现在 async 函数中。然后细心的朋友会产生一个疑问，如果 await 只能出现在 async 函数中，那这个 async 函数应该怎么调用？
 
 如果需要通过 await 来调用一个 async 函数，那这个调用的外面必须得再包一个 async 函数，然后……进入死循环，永无出头之日……
 
-如果 async 函数不需要 await 来调用，那 async 到底起个啥作用？
+# 如果 async 函数不需要 await 来调用，那 async 到底起个啥作用？
 <!--more-->
 async 起什么作用
 这个问题的关键在于，async 函数是怎么处理它的返回值的！
@@ -48,7 +48,7 @@ testAsync().then(v => {
 
 那么下一个关键点就在于 await 关键字了。
 
-#await 到底在等啥
+# await 到底在等啥
 一般来说，都认为 await 是在等待一个 async 函数完成。不过按语法说明，await 等待的是一个表达式，这个表达式的计算结果是 Promise 对象或者其它值（换句话说，就是没有特殊限定）。
 
 因为 async 函数返回一个 Promise 对象，所以 await 可以用于等待一个 async 函数的返回值——这也可以说是 await 在等 async 函数，但要清楚，它等的实际是一个返回值。注意到 await 不仅仅用于等 Promise 对象，它可以等任意表达式的结果，所以，await 后面实际是可以接普通函数调用或者直接量的。所以下面这个示例完全可以正确运行
@@ -70,7 +70,7 @@ async function test() {
 
 test();
 ```
-#await 等到了要等的，然后呢
+# await 等到了要等的，然后呢
 await 等到了它要等的东西，一个 Promise 对象，或者其它值，然后呢？我不得不先说，await 是个运算符，用于组成表达式，await 表达式的运算结果取决于它等的东西。
 
 如果它等到的不是一个 Promise 对象，那 await 表达式的运算结果就是它等到的东西。
@@ -79,7 +79,7 @@ await 等到了它要等的东西，一个 Promise 对象，或者其它值，�
 
 看到上面的阻塞一词，心慌了吧……放心，这就是 await 必须用在 async 函数中的原因。async 函数调用不会造成阻塞，它内部所有的阻塞都被封装在一个 Promise 对象中异步执行。
 
-#async/await 帮我们干了啥
+# async/await 帮我们干了啥
 作个简单的比较
 上面已经说明了 async 会将其后的函数（函数表达式或 Lambda）的返回值封装成一个 Promise 对象，而 await 会等待这个 Promise 完成，并将其 resolve 的结果返回出来。
 
@@ -114,7 +114,7 @@ test();
 
 又一个疑问产生了，这两段代码，两种方式对异步调用的处理（实际就是对 Promise 对象的处理）差别并不明显，甚至使用 async/await 还需要多写一些代码，那它的优势到底在哪？
 
-##async/await 的优势在于处理 then 链
+## async/await 的优势在于处理 then 链
 单一的 Promise 链并不能发现 async/await 的优势，但是，如果需要处理由多个 Promise 组成的 then 链的时候，优势就能体现出来了（很有意思，Promise 通过 then 链来解决多层回调的问题，现在又用 async/await 来进一步优化它）。
 
 假设一个业务，分多个步骤完成，每个步骤都是异步的，而且依赖于上一个步骤的结果。我们仍然用 setTimeout 来模拟异步操作：
