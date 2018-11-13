@@ -8,19 +8,19 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>前端路由的前世今生 | BoBo&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="什么是路由  路由这个概念最先是后端出现的。在以前用模板引擎开发页面时，经常会看到这样1http://hometown.xxx.edu.cn/bbs/forum.php   有时还会有带.asp或.html的路径，这就是所谓的SSR(Server Side Render)，通过服务端渲染，直接返回页面。 其响应过程是这样的 1.浏览器发出请求  2.服务器监听到80端口（或443）有请求过来，并解">
+  <meta name="description" content="什么是路由  原文地址:https://github.com/hwen/blogsome/issues/2   路由这个概念最先是后端出现的。在以前用模板引擎开发页面时，经常会看到这样1http://hometown.xxx.edu.cn/bbs/forum.php 有时还会有带.asp或.html的路径，这就是所谓的SSR(Server Side Render)，通过服务端渲染，直接返回页面。">
 <meta name="keywords" content="vue,jquery">
 <meta property="og:type" content="article">
 <meta property="og:title" content="前端路由的前世今生">
 <meta property="og:url" content="http://yoursite.com/2018/11/13/router/index.html">
 <meta property="og:site_name" content="BoBo&#39;s Blog">
-<meta property="og:description" content="什么是路由  路由这个概念最先是后端出现的。在以前用模板引擎开发页面时，经常会看到这样1http://hometown.xxx.edu.cn/bbs/forum.php   有时还会有带.asp或.html的路径，这就是所谓的SSR(Server Side Render)，通过服务端渲染，直接返回页面。 其响应过程是这样的 1.浏览器发出请求  2.服务器监听到80端口（或443）有请求过来，并解">
+<meta property="og:description" content="什么是路由  原文地址:https://github.com/hwen/blogsome/issues/2   路由这个概念最先是后端出现的。在以前用模板引擎开发页面时，经常会看到这样1http://hometown.xxx.edu.cn/bbs/forum.php 有时还会有带.asp或.html的路径，这就是所谓的SSR(Server Side Render)，通过服务端渲染，直接返回页面。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://user-images.githubusercontent.com/6712767/36025788-4ef185a0-0dcf-11e8-9dc3-629aba9024a1.png">
-<meta property="og:updated_time" content="2018-11-13T06:54:46.000Z">
+<meta property="og:updated_time" content="2018-11-13T06:56:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端路由的前世今生">
-<meta name="twitter:description" content="什么是路由  路由这个概念最先是后端出现的。在以前用模板引擎开发页面时，经常会看到这样1http://hometown.xxx.edu.cn/bbs/forum.php   有时还会有带.asp或.html的路径，这就是所谓的SSR(Server Side Render)，通过服务端渲染，直接返回页面。 其响应过程是这样的 1.浏览器发出请求  2.服务器监听到80端口（或443）有请求过来，并解">
+<meta name="twitter:description" content="什么是路由  原文地址:https://github.com/hwen/blogsome/issues/2   路由这个概念最先是后端出现的。在以前用模板引擎开发页面时，经常会看到这样1http://hometown.xxx.edu.cn/bbs/forum.php 有时还会有带.asp或.html的路径，这就是所谓的SSR(Server Side Render)，通过服务端渲染，直接返回页面。">
 <meta name="twitter:image" content="https://user-images.githubusercontent.com/6712767/36025788-4ef185a0-0dcf-11e8-9dc3-629aba9024a1.png">
   
     <link rel="alternative" href="/atom.xml" title="BoBo&#39;s Blog" type="application/atom+xml">
@@ -185,9 +185,10 @@
       
         <h2 id="什么是路由"><a href="#什么是路由" class="headerlink" title="什么是路由"></a>什么是路由</h2><blockquote>
 <blockquote>
+<p>原文地址:<a href="https://github.com/hwen/blogsome/issues/2" target="_blank" rel="noopener">https://github.com/hwen/blogsome/issues/2</a></p>
+</blockquote>
+</blockquote>
 <p>路由这个概念最先是后端出现的。在以前用模板引擎开发页面时，经常会看到这样<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="comment">//hometown.xxx.edu.cn/bbs/forum.php</span></span><br></pre></td></tr></table></figure></p>
-</blockquote>
-</blockquote>
 <p>有时还会有带.asp或.html的路径，这就是所谓的SSR(Server Side Render)，通过服务端渲染，直接返回页面。</p>
 <h3 id="其响应过程是这样的"><a href="#其响应过程是这样的" class="headerlink" title="其响应过程是这样的"></a>其响应过程是这样的</h3><ul>
 <li><p>1.浏览器发出请求</p>
@@ -482,14 +483,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jquery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">http</a>
               </li>
              
@@ -514,15 +507,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">vuex</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">生活</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">记录</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jquery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">vuex</a>
               </li>
             
             <div class="clearfix"></div>
