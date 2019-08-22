@@ -158,6 +158,90 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-promise" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/22/promise/">promise手写实现(转)</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/22/promise/" class="archive-article-date">
+  	<time datetime="2019-08-22T01:45:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="转自网络收藏一下"><a href="#转自网络收藏一下" class="headerlink" title="转自网络收藏一下"></a>转自网络收藏一下</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// promise 的特点</span></span><br><span class="line"><span class="comment">// 状态: pending =&gt; resolved / rejected, 单向单次转换, 一旦改变就不会再改变</span></span><br><span class="line"><span class="comment">// promise.prototype.then 返回的是一个 promise 对象, 状态由回调函数的返回值决定</span></span><br><span class="line"><span class="comment">// 返回值: 由对应状态的处理函数(resolve, reject函数)返回, 这个值会传递给 then</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// then 方法里面的两个参数也是函数, 两个函数的返回值都有如下两种情况:</span></span><br><span class="line"><span class="comment">// 1. 处理函数的返回值是非 promise 对象(普通数据), then 方法返回一个状态为 resolved 的 promise 对象</span></span><br><span class="line"><span class="comment">// 2. 处理函数返回值是 promise 对象, then 方法返回的 promise 对象的状态由处理函数的状态决定</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">myPromise</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(fn) &#123;</span><br><span class="line">    <span class="comment">// new Promise 对象的参数一定是一个函数, 这个函数的两个参数也是两个函数.</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> fn !== <span class="string">"function"</span>) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="built_in">TypeError</span>(<span class="string">`Promise resolver <span class="subst">$&#123;fn&#125;</span> is not a function`</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 如果是函数, 则进入正常的 Promise 代码执行.</span></span><br><span class="line">      <span class="comment">//  若传递参数是函数, 那么它会执行, 但是两个参数函数是 promise 的状态处理函数</span></span><br><span class="line">      <span class="comment">//  在原生的 Promise 对象中, resolve reject, 是内部定义好的. 我们也需要在内部定义</span></span><br><span class="line"></span><br><span class="line">      <span class="keyword">let</span> resolve = <span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">if</span> (<span class="keyword">this</span>.status === <span class="string">"pending"</span>) &#123;</span><br><span class="line">            <span class="comment">// 如果状态是 pending, 才允许改变</span></span><br><span class="line">            <span class="keyword">this</span>.status = <span class="string">"resolved"</span>;</span><br><span class="line">            <span class="keyword">this</span>.data = data;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.resolveCB.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">              <span class="keyword">this</span>.resolveCB.forEach(<span class="function"><span class="params">fn</span> =&gt;</span> fn());</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;, <span class="number">0</span>);</span><br><span class="line">      &#125;;</span><br><span class="line">      <span class="keyword">let</span> reject = <span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 状态改变, 若是执行 reject 函数, 状态改变为 rejected, 数据存储</span></span><br><span class="line">        setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">if</span> (<span class="keyword">this</span>.status === <span class="string">"pending"</span>) &#123;</span><br><span class="line">            <span class="comment">// 如果状态是 pending, 才允许改变</span></span><br><span class="line">            <span class="keyword">this</span>.status = <span class="string">"rejected"</span>;</span><br><span class="line">            <span class="keyword">this</span>.data = error;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.rejectCB.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">              <span class="keyword">this</span>.rejectCB.forEach(<span class="function"><span class="params">fn</span> =&gt;</span> fn());</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;, <span class="number">0</span>);</span><br><span class="line">      &#125;;</span><br><span class="line">      <span class="comment">// 状态改变, 若是执行 resolve 函数, 状态改变为 resolved, 数据存储</span></span><br><span class="line">      <span class="keyword">this</span>.status = <span class="string">"pending"</span>; <span class="comment">//  promise 一开始的默认状态是 pending</span></span><br><span class="line">      <span class="keyword">this</span>.data = <span class="literal">undefined</span>; <span class="comment">//  数据是undefined</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">// 这两个属性是两个函数, 用来存储 then 方法中第三种情况, 来不及做的要做的事情</span></span><br><span class="line">      <span class="keyword">this</span>.resolveCB = [];</span><br><span class="line">      <span class="keyword">this</span>.rejectCB = [];</span><br><span class="line">      fn(resolve, reject);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// myPromise 原型上的方法 then</span></span><br><span class="line">  <span class="comment">// 参数是两个函数, 第一个用来处理 resolved 状态, 第二个处理 reject 状态</span></span><br><span class="line">  then(onResolve, onReject) &#123;</span><br><span class="line">    <span class="comment">// 无论怎样, then 的返回值都是一个 promise 对象</span></span><br><span class="line">    <span class="comment">// 所以, 无论那种情况, 都需要 return 一个 promise 对象</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.status === <span class="string">"resolved"</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> myPromise(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 根据 onResolved 函数的执行结果, 决定 promise 对象的状态, 需要判断结果的类型</span></span><br><span class="line">        <span class="comment">// 我们使用 res 保存一下</span></span><br><span class="line">        <span class="keyword">let</span> res = onResolve(<span class="keyword">this</span>.data); <span class="comment">// this.data 就是 promise 中 resolve 或者 reject 保存的数据</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//  如果 res 是 promise 对象</span></span><br><span class="line">        <span class="keyword">if</span> (res <span class="keyword">instanceof</span> myPromise) &#123;</span><br><span class="line">          <span class="comment">// 如果 res 是一个 promise 对象, 那么一定要去触发 then 方法.</span></span><br><span class="line">          res.then(resolve, reject);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="comment">// 如果不是 promise 对象, 让 promise 的状态变成 resolved 即可</span></span><br><span class="line">          resolve(res);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.status === <span class="string">"rejected"</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> myPromise(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> res = onReject(<span class="keyword">this</span>.data);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//  如果 res 是 promise 对象</span></span><br><span class="line">        <span class="keyword">if</span> (res <span class="keyword">instanceof</span> myPromise) &#123;</span><br><span class="line">          res.then(resolve, reject);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="comment">// 如果不是 promise 对象</span></span><br><span class="line">          resolve(res); <span class="comment">// 返回状态为 resolved 的 promise 对象</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.status === <span class="string">"pending"</span>) &#123;</span><br><span class="line">      <span class="comment">// 上面两个 if 分别处理了 resolved 和 rejected 状态</span></span><br><span class="line">      <span class="comment">// 但是当 promise 内部是一个延时定时器的时候, 代码执行到这里, 定时器的时间还没有到达, 代码没有执行</span></span><br><span class="line">      <span class="comment">// 状态就一直是 pending, 因为 js 引擎不会等. 但是最终那个数据还是接收到了</span></span><br><span class="line">      <span class="comment">// 错过了就是错过了</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">// 定时器不知道什么时候结束, 状态改变之后, 又不会触发这件事了</span></span><br><span class="line">      <span class="comment">// 我们需要把这个要做的事情存储起来, 等状态改变之后, 再去判断要走 resolved 还是 rejected</span></span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> myPromise(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 因为处理状态需要用到数据, 就需要传递参数</span></span><br><span class="line">        <span class="comment">// 所以不可能写成 this.resolveCB = 函数名 的形式, 需要用到闭包</span></span><br><span class="line">        <span class="comment">/*--------------------------闭包---------------------------*/</span></span><br><span class="line">        <span class="keyword">this</span>.resolveCB.push(</span><br><span class="line">          (<span class="function"><span class="params">resolveFn</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">              <span class="keyword">let</span> res = resolveFn &amp;&amp; resolveFn(<span class="keyword">this</span>.data);</span><br><span class="line">              <span class="keyword">if</span> (res <span class="keyword">instanceof</span> myPromise) &#123;</span><br><span class="line">                res.then(resolve, reject);</span><br><span class="line">              &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                resolve(res);</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;;</span><br><span class="line">          &#125;)(onResolve)</span><br><span class="line">        );</span><br><span class="line">        <span class="comment">/*--------------------------闭包---------------------------*/</span></span><br><span class="line">        <span class="keyword">this</span>.rejectCB.push(</span><br><span class="line">          (<span class="function"><span class="params">rejectFn</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">              <span class="keyword">let</span> res = rejectFn &amp;&amp; rejectFn(<span class="keyword">this</span>.data);</span><br><span class="line">              <span class="keyword">if</span> (res <span class="keyword">instanceof</span> myPromise) &#123;</span><br><span class="line">                res.then(resolve, reject);</span><br><span class="line">              &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                resolve(res);</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;;</span><br><span class="line">          &#125;)(onReject)</span><br><span class="line">        );</span><br><span class="line">        <span class="comment">/*---------------------------------------------------------*/</span></span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Promise</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/web//" class="article-tag-list-link color3">前端</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/22/promise/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-vue-slot" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -198,7 +282,7 @@
 <p>子组件：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child"</span>&gt;</span></span><br><span class="line">    // 具名插槽</span><br><span class="line">    <span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">"up"</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>这里是子组件<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    // 具名插槽</span><br><span class="line">    <span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">"down"</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line">    // 匿名插槽</span><br><span class="line">    <span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>显示结果如图：<br><img src="https://github.com/cunzaizhuyi/blog-assets/blob/master/vue-slot/slot2.png?raw=true" alt=""></p>
 <p>可以看到，父组件通过html模板上的slot属性关联具名插槽。没有slot属性的html模板默认关联匿名插槽。</p>
-<h2 id="作用域插槽-带数据的插槽"><a href="#作用域插槽-带数据的插槽" class="headerlink" title="作用域插槽 | 带数据的插槽"></a>作用域插槽 | 带数据的插槽</h2><p>最后，就是我们的作用域插槽。这个稍微难理解一点。官方叫它作用域插槽，实际上，对比前面两种插槽，我们可以叫它带数据的插槽。什么意思呢，就是前面两种，都是在组件的template里面写<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">匿名插槽</span><br><span class="line">&lt;slot&gt;<span class="xml"><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span></span><br><span class="line">具名插槽</span><br><span class="line">&lt;slot name=<span class="string">"up"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<h2 id="作用域插槽-带数据的插槽"><a href="#作用域插槽-带数据的插槽" class="headerlink" title="作用域插槽 | 带数据的插槽"></a>作用域插槽 | 带数据的插槽</h2><p>最后，就是我们的作用域插槽。这个稍微难理解一点。官方叫它作用域插槽，实际上，对比前面两种插槽，我们可以叫它带数据的插槽。什么意思呢，就是前面两种，都是在组件的template里面写<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">匿名插槽</span><br><span class="line"><span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line">具名插槽</span><br><span class="line"><span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">"up"</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>但是<strong>作用域插槽要求，在slot上面绑定数据</strong>。也就是你得写成大概下面这个样子。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;slot name=<span class="string">"up"</span> :data=<span class="string">"data"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span></span><br><span class="line"> <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    data: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        data: [<span class="string">'zhangsan'</span>,<span class="string">'lisi'</span>,<span class="string">'wanwu'</span>,<span class="string">'zhaoliu'</span>,<span class="string">'tianqi'</span>,<span class="string">'xiaoba'</span>]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>我们前面说了，插槽最后显示不显示是看父组件有没有在child下面写模板，像下面那样。<br><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">&lt;child&gt;</span></span><br><span class="line">   <span class="attribute">html</span>模板</span><br><span class="line"><span class="section">&lt;/child&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>写了，插槽就总得在浏览器上显示点东西，东西就是html该有的模样，没写，插槽就是空壳子，啥都没有。<br>OK，我们说有html模板的情况，就是父组件会往子组件插模板的情况，那到底插一套什么样的样式呢，这由父组件的html+css共同决定，但是这套样式里面的内容呢？</p>
@@ -447,15 +531,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Promise</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">async</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">await</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Promise</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -1079,95 +1163,6 @@
 
 
   
-    <article id="post-http" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/27/http/">http各类请求参数</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/27/http/" class="archive-article-date">
-  	<time datetime="2018-03-27T06:43:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Query String Parameters<br>当发起一次GET请求时，参数会以url string的形式进行传递。即?后的字符串则为其请求参数，并以&amp;作为分隔符。</p>
-<p>如下http请求报文头：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// General</span></span><br><span class="line">Request URL: http:<span class="comment">//foo.com?x=1&amp;y=2</span></span><br><span class="line">Request Method: GET</span><br><span class="line"></span><br><span class="line"><span class="comment">// Query String Parameters</span></span><br><span class="line">x=<span class="number">1</span>&amp;y=<span class="number">2</span></span><br><span class="line">Form Data</span><br></pre></td></tr></table></figure></p>
-<p>当发起一次POST请求时，若未指定content-type，则默认content-type为application/x-www-form-urlencoded。即参数会以Form Data的形式进行传递，不会显式出现在请求url中。<br>
-        
-          <a class="article-more-a" href="/2018/03/27/http/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">http</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/web//" class="article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/27/http/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1265,11 +1260,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">async</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">await</a>
+                <a href="javascript:void(0)" class="js-tag color5">http</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1277,31 +1272,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">var</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">let</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">const</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">http</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1342,6 +1313,30 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">vuex</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">async</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">await</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">var</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">let</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">const</a>
               </li>
             
             <div class="clearfix"></div>
